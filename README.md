@@ -33,6 +33,5 @@ This project is licensed under the GPL v3 license
 
 ## Acknowledgments
 
-* Code for the check boxes in the tree view came from [here](http://www.qtforum.org/article/33153/subclassing-qfilesystemmodel-for-showing-checkboxes.html?s=08e3b1fcefdd34c11327203380f63d80e0b5e055#post106871
-//by Mat).
+* Code for the check boxes in the tree view came from [here](http://www.qtforum.org/article/33153/subclassing-qfilesystemmodel-for-showing-checkboxes.html?s=08e3b1fcefdd34c11327203380f63d80e0b5e055#post106871).
 
