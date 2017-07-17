@@ -24,8 +24,6 @@ FileSync::FileSync() :
     //widgets
     w.resize(1200,800);
 
-    model.setFilter(QDir::AllDirs | QDir::Dirs | QDir::NoDotAndDotDot);
-
     filetree.setModel(&model);
     filetree.setColumnWidth(0, 600);
     filetree.setRootIndex(model.setRootPath(sourceDir));
@@ -109,6 +107,7 @@ void FileSync::sync()
     arguments << "-rvR" << "--size-only";
 
     QDir base(sourceDir);
+    // /./ makes create directory structure starting from that point on.
     for (const QString &v : model.directories) {
         QString path = base.relativeFilePath(v).prepend(QString(sourceDir).append("/./"));
         arguments << path;
@@ -119,6 +118,11 @@ void FileSync::sync()
     syncBut.setEnabled(false);
 
     rsync = new QProcess;
+
+    connect(rsync, SIGNAL(finished(int)), this, SLOT(cleanupRsync()));
+    connect(rsync, SIGNAL(readyReadStandardOutput()), this, SLOT(updateStdOut()));
+    connect(rsync, SIGNAL(readyReadStandardError()), this, SLOT(updateError()));
+
     rsync->start(program, arguments);
 
     if (!rsync->waitForStarted())
@@ -127,10 +131,6 @@ void FileSync::sync()
         msgBox.setText("Cannot run rsync.");
         msgBox.exec();
     }
-
-    connect(rsync, SIGNAL(finished(int)), this, SLOT(cleanupRsync()));
-    QObject::connect(rsync, SIGNAL(readyReadStandardOutput()), this, SLOT(updateStdOut()));
-    QObject::connect(rsync, SIGNAL(readyReadStandardError()), this, SLOT(updateError()));
 }
 
 void FileSync::updateStdOut()
