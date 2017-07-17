@@ -4,12 +4,14 @@ Selective folder sync using rsync
 
 The program will copy all folders selected in the tree view to a destination folder, maintaining the folder structure.
 
-* Select source directory
-* Select destination directory
-* Select folder to copy
-* 'Sync' will copy the selected folder using rsync
+Using the program:
 
-The folder list is saved as 'folderlist.txt' in the source directory.
+* Select the source directory.
+* Select the destination directory.
+* Select folders to copy in the tree view.
+* The 'Sync' button will copy the selected folders using rsync.
+* The folder list is saved as 'folderlist.txt' in the source directory.
+* The folder list is saved on program exit or on hitting the 'Save' button.
 
 ## Getting Started
 
