@@ -13,11 +13,9 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-    customfilesystemmodel.cpp \
-    file_sync.cpp
+    custom_filesystem_model.cpp \
+    folder_sync.cpp
 
 HEADERS  += \
-    customfilesystemmodel.h \
-    file_sync.h
-
-FORMS    +=
+    custom_filesystem_model.h \
+    folder_sync.h

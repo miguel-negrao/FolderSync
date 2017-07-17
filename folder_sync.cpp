@@ -1,10 +1,10 @@
-#include "file_sync.h"
+#include "folder_sync.h"
 #include <QMessageBox>
 #include <QCoreApplication>
 #include <QSettings>
 #include <QFileDialog>
 
-FileSync::FileSync() :
+FolderSync::FolderSync() :
     selectSourceBut("Source"),
     selectDestBut("Destination"),
     saveBut("Save list to file"),
@@ -51,7 +51,7 @@ FileSync::FileSync() :
     w.show();
 }
 
-void FileSync::saveListFile()
+void FolderSync::saveListFile()
 {
 
     QString listFile = QString(sourceDir).append("/folderlist.txt");
@@ -67,7 +67,7 @@ void FileSync::saveListFile()
     }
 }
 
-void FileSync::readListFile()
+void FolderSync::readListFile()
 {
     QString listFile = QString(sourceDir).append("/folderlist.txt");
     QFileInfo info(listFile);
@@ -97,7 +97,7 @@ void FileSync::readListFile()
     }
 }
 
-void FileSync::sync()
+void FolderSync::sync()
 {
     if(rsyncRunning)
         return;
@@ -133,31 +133,31 @@ void FileSync::sync()
     }
 }
 
-void FileSync::updateStdOut()
+void FolderSync::updateStdOut()
 {
     QByteArray result = rsync->readAllStandardOutput();
     textView.appendPlainText(result);
 }
 
-void FileSync::updateError()
+void FolderSync::updateError()
 {
     QByteArray result = rsync->readAllStandardError();
     textView.appendPlainText(result);
 }
 
-void FileSync::cleanupRsync()
+void FolderSync::cleanupRsync()
 {
     delete rsync;
     rsyncRunning = false;
     syncBut.setEnabled(true);
 }
 
-void FileSync::selectSource()
+void FolderSync::selectSource()
 {
     QString dir = QFileDialog::getExistingDirectory(&w, tr("Open Directory"),
-                                                  "/home",
-                                                  QFileDialog::ShowDirsOnly
-                                                  | QFileDialog::DontResolveSymlinks);
+                                                    "/home",
+                                                    QFileDialog::ShowDirsOnly
+                                                    | QFileDialog::DontResolveSymlinks);
 
     if (!dir.isEmpty())
     {
@@ -172,12 +172,12 @@ void FileSync::selectSource()
 
 }
 
-void FileSync::selectDest()
+void FolderSync::selectDest()
 {
     QString dir = QFileDialog::getExistingDirectory(&w, tr("Open Directory"),
-                                                  "/home",
-                                                  QFileDialog::ShowDirsOnly
-                                                  | QFileDialog::DontResolveSymlinks);
+                                                    "/home",
+                                                    QFileDialog::ShowDirsOnly
+                                                    | QFileDialog::DontResolveSymlinks);
 
     if (!dir.isEmpty())
     {
@@ -190,7 +190,7 @@ void FileSync::selectDest()
 
 }
 
-void FileSync::updateLabel()
+void FolderSync::updateLabel()
 {
     label.setText(QString("source: %1 dest: %2").arg(sourceDir).arg(destDir));
 }

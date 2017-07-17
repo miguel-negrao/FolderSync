@@ -1,11 +1,11 @@
 #include <QApplication>
-#include "file_sync.h"
+#include "folder_sync.h"
 
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
 
-    FileSync window;
+    FolderSync window;
 
     QObject::connect(&app, SIGNAL(lastWindowClosed()), &window, SLOT(saveListFile()));
 

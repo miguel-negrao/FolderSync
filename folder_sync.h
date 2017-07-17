@@ -12,13 +12,13 @@
 #include <QProcess>
 #include <QLabel>
 
-#include "customfilesystemmodel.h"
+#include "custom_filesystem_model.h"
 
-class FileSync : public QObject
+class FolderSync : public QObject
 {
     Q_OBJECT
 public:
-    explicit FileSync();
+    explicit FolderSync();
 
 signals:
 
